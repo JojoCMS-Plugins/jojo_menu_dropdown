@@ -1,0 +1,1 @@
+This is a plugin designed to speed up development of drop down menus by providing a template for insertion by filter and standard javascript and css for a common javascript drop down menu.

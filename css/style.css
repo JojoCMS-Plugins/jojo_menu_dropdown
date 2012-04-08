@@ -1,0 +1,44 @@
+
+.topbar-menu-item {
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: left;
+}
+
+ul.topbar-menu-item {
+    list-style: none outside none;
+    position: relative;
+}
+
+li.topbar-menu-item {   
+    float: left;
+    background: transparent;
+    position: relative;
+}
+
+.sub-menu-item {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+ul.sub-menu-item {
+    position: absolute;
+    top: 35px;
+    padding: 10px 0 5px;
+    z-index: 10000;
+}
+
+li.sub-menu-item {  
+    float: none;
+    background: transparent;
+    list-style: none;
+    position:relative;
+}
+
+a.sub-menu-item {
+    padding: 5px;
+    margin: 0;
+    white-space: nowrap;
+}
