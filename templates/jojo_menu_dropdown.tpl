@@ -22,7 +22,7 @@
         {*{menu $mainnav 0}*}
 
         <ul id="nav-level1">{$navCount = 0}
-            {foreach $mainnav k n mainnav}<li class="itemNo{$navCount}{if $.foreach.mainnav.last} last{elseif $.foreach.mainnav.first} first{/if}{if $n.selected} current{/if}" ><a href="{$n.url}" title="{$n.title}"{if $n.pg_followto=='no'} rel="nofollow"{/if}>{$n.label}</a>
+            {foreach $mainnav k n mainnav}<li class="itemNo{$navCount}{if $.foreach.mainnav.last} last{elseif $.foreach.mainnav.first} first{/if}{if $n.selected} current{/if}" ><a href="{$n.url}" title="{$n.title}"{if $n.pg_followto=='no'} rel="nofollow"{/if}>{$n.label}{if $n.subnav}<span class="hassubnav"></span>{/if}</a>
                 {if $n.subnav }<ul class="subnav-level1">
                     {foreach $n.subnav sk s subnav}<li class="{if $s.selected}current {/if}{if $.foreach.subnav.last}last {/if}"><a class="menu-sub-link" href="{$s.url}" title="{$s.title}">{$s.label}</a>{if $s.subnav }
                         <ul>
