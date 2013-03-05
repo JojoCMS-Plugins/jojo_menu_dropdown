@@ -1,14 +1,14 @@
 function MenuController( rootElement ) {
-	
+
 	this.rootElement = rootElement;
-	
+
 	function checkRootElement() {
 		var rootNodeName = jQuery(rootElement).get(0).tagName;
-		if(rootNodeName != "DIV") {
-			throw "Type of main menu root element should be div";
+		if(!rootNodeName == "DIV" || !rootNodeName == "nav") {
+			throw "Type of main menu root element should be div or nav";
 		}
 	}
-	
+
 	function setCssForTopbarItems( topList ) {
 		topList.children("li").each( function() {
 			topItem = jQuery(this);
@@ -18,7 +18,7 @@ function MenuController( rootElement ) {
 			});
 		});
 	}
-	
+
 	function setCssForSubItems( topList ) {
 		topList.find(":not(.topbar-menu-item)").each( function() {
 			var subItem = jQuery(this);
@@ -28,7 +28,7 @@ function MenuController( rootElement ) {
 			}
 		});
 	}
-	
+
 	function setCssClasses() {
 		rootElement.addClass("topbar-menu-item");
 		var topList = rootElement.find("ul:first");
@@ -36,21 +36,23 @@ function MenuController( rootElement ) {
 		setCssForTopbarItems(topList);
 		setCssForSubItems(topList);
 	}
-	
+
 	function hideAllSubMenus() {
 		rootElement.find("ul.sub-menu-item").each( function() {
-			jQuery(this).css({
-				"display": "none"
-			});
+			if (!jQuery(this).hasClass('nohide')) {
+			    jQuery(this).css({
+				    "display": "none"
+			    });
+			}
 		});
 	}
-	
+
 	function updateStyle(element, style) {
 		for(var entry in style) {
 			element.css( entry, style[entry] );
 		}
 	}
-	
+
 	function setMouseEventHandlers() {
 		rootElement.find("li.topbar-menu-item, li.sub-menu-item").hover( function() {
 			var parent = jQuery(this);
@@ -65,7 +67,7 @@ function MenuController( rootElement ) {
 					jQuery(this).css("left", parent.width()+1);
 					jQuery(this).css("top", 0);
 				}
-				jQuery(this).css({visibility: "visible",display: "none"}).show(); 
+				jQuery(this).css({visibility: "visible",display: "none"}).show();
 			});
 		}, function() {
 			var parent = jQuery(this);
@@ -80,7 +82,7 @@ function MenuController( rootElement ) {
 			});
 		});
 	}
-	
+
 	function refresh() {
 		var maxHeight = 35;
 		rootElement.find("li.topbar-menu-item").each( function() {
@@ -93,20 +95,20 @@ function MenuController( rootElement ) {
 		}
 		rootElement.height(maxHeight);
 	}
-	
+
 	this.doSearch = function() {
 		var searchString = getSearchString();
 		searchButton.action.call(null, searchString);
 	}
-	
+
 	function refreshSearchPanel() {
-		
+
 		if(!showSearchPanel) {
 			return;
 		}
-		
+
 		var searchTable = rootElement.find("table.topbar-search");
-		var searchPanelHtml = ""; 
+		var searchPanelHtml = "";
 		searchPanelHtml += "<tr>";
 		searchPanelHtml += "<td class=\"topbar-search\">";
 		searchPanelHtml += "<input class=\"topbar-search\" type=\"text\"/>";
@@ -141,7 +143,7 @@ function MenuController( rootElement ) {
 			});
 		}
 	}
-	
+
 	function addArrow( arrow, selector ) {
 		if( arrow == "") {
 			return;
@@ -156,12 +158,12 @@ function MenuController( rootElement ) {
 			}
 		});
 	}
-	
+
 	function addArrows() {
 		addArrow( topbarArrow, "li.topbar-menu-item" );
 		addArrow( submenuArrow, "li.sub-menu-item" );
 	}
-	
+
 	this.init = function() {
 		checkRootElement();
 		setCssClasses();
@@ -170,39 +172,39 @@ function MenuController( rootElement ) {
 		addArrows();
 		refresh();
 	};
-	
+
 	this.setRootStyle = function(style) {
 		rootElement.css(style);
 		refresh();
 	};
-	
+
 	this.setStyle = function(selector, style) {
 		rootElement.find(selector).each( function() {
 			jQuery(this).css(style);
 		});
 		refresh();
 	};
-	
+
 	var topbarItemStyle = "";
 	this.setTopbarItemStyle = function(style) {
 		topbarItemStyle = style;
 	};
-	
+
 	var topbarItemSelectedStyle = "";
 	this.setTopbarItemSelectedStyle = function(style) {
 		topbarItemSelectedStyle = style;
 	};
-	
+
 	var subItemStyle = "";
 	this.setSubItemStyle = function(style) {
 		subItemStyle = style;
 	};
-	
+
 	var subItemSelectedStyle = "";
 	this.setSubItemSelectedStyle = function(style) {
 		subItemSelectedStyle = style;
 	};
-	
+
 	var topbarArrow = "";
 	var submenuArrow = "";
 	this.setArrows = function(topbar, submenu) {
@@ -210,24 +212,24 @@ function MenuController( rootElement ) {
 		submenuArrow = submenu;
 		addArrows();
 	};
-	
+
 	var showSearchPanel = false;
 	this.setShowSearchPanel = function(value) {
 		showSearchPanel = value;
 		refreshSearchPanel();
 	};
-	
+
 	var searchButton = "";
 	this.setSearchButton = function(value) {
 		searchButton = value;
 		refreshSearchPanel();
 	};
-	
+
 	this.getSearchText = function() {
 		var searchString = getSearchString();
 		return searchString;
 	};
-	
+
 	function getSearchString() {
 		var searchString = "";
 		rootElement.find("input:text.topbar-search").each( function() {
@@ -235,7 +237,7 @@ function MenuController( rootElement ) {
 		});
 		return searchString;
 	}
-	
+
 	this.setSearchText = function(value) {
 		rootElement.find("input:text.topbar-search").each( function() {
 			jQuery(this).val(value);
