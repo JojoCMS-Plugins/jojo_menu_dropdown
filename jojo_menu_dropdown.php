@@ -22,14 +22,10 @@ class Jojo_Plugin_jojo_menu_dropdown extends Jojo_Plugin
         }
         global $smarty;
 
-        /* Find all video filter tags */
-        preg_match_all('/\[\[menu_dropdown\]\]/', $content, $matches);
-            
-        foreach($matches[0] as $k => $url) {
-            /* Get the embed html */
-            $html = $smarty->fetch('jojo_menu_dropdown.tpl');
-            $content = str_replace($matches[0][$k], $html, $content);
-        }
+        /* Find all dropdown menus */
+        $html = $smarty->fetch('jojo_menu_dropdown.tpl');
+        $content = str_replace("[[menu_dropdown]]", $html, $content);
+
         return $content;
     }
 }
