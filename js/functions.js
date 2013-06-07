@@ -84,7 +84,7 @@ function MenuController( rootElement ) {
 	}
 
 	function refresh() {
-		var maxHeight = 35;
+		var maxHeight = 1;
 		rootElement.find("li.topbar-menu-item").each( function() {
 			if(jQuery(this).height() > maxHeight) {
 				maxHeight = jQuery(this).height();
