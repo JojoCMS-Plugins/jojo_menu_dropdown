@@ -19,7 +19,7 @@
         </ul>
     {/template}*}
     <div id="menu">
-        <ul id="nav-level1"{if $responsiveselect} class="{if $responsiveselectsize=='phone'}hidden-phone{else}visible-desktop{/if}"{/if}>
+        <ul id="nav-level1"{if $responsiveselect} class="{if $responsiveselectsize=='phone'}hidden-xs{else}visible-md{/if}"{/if}>
             {foreach $mainnav k n mainnav}<li class="itemNo{$k}{if $.foreach.mainnav.last} last{elseif $.foreach.mainnav.first} first{/if}{if $n.selected} current{/if}" ><a href="{$n.url}" title="{$n.title}"{if $n.pg_followto=='no'} rel="nofollow"{/if}>{$n.label}<span{if $n.subnav} class="hassubnav"{/if}></span></a>
                 {if $n.subnav }<ul class="subnav-level1">
                     {foreach $n.subnav sk s subnav}<li class="{if $s.selected}current {/if}{if $.foreach.subnav.last}last {/if}"><a class="menu-sub-link" href="{$s.url}" title="{$s.title}">{$s.label}<span{if $s.subnav} class="hassubnav"{/if}></span></a>{if $s.subnav }
@@ -38,7 +38,7 @@
             {/if}</li>
             {/foreach}
         </ul>
-        {if $responsiveselect}<select class="{if $responsiveselectsize=='phone'}visible-phone{else}hidden-desktop{/if}" onchange="window.location.href = $(this).val();">
+        {if $responsiveselect}<select class="form-control {if $responsiveselectsize=='phone'}visible-xs{else}hidden-md{/if}" onchange="window.location.href = $(this).val();">
             {if $responsiveselecttext && $pageid==$home}<option value="">{$responsiveselecttext}</option>{/if}
             {foreach $mainnav n}<option value="{$n.url}"{if $n.pageid==$pageid || ($n.selected && $n.subnav)} selected="selected"{/if}>{$n.label}</option>{if !$responsiveselectsubnav && $n.subnav}
                 {foreach $n.subnav s}<option value="{$s.url}" class="subnav"{if $s.pageid==$pageid} selected="selected"{/if}>{$s.label}</option>
@@ -47,7 +47,7 @@
             {/foreach}
         </select>
         {/if}
-        {if $responsiveselect && $selectsubnav}<select class="subnav {if $responsiveselectsize=='phone'}visible-phone{else}hidden-desktop{/if}" onchange="window.location.href = $(this).val();">
+        {if $responsiveselect && $selectsubnav}<select class="subnav form-control {if $responsiveselectsize=='phone'}visible-xs{else}hidden-md{/if}" onchange="window.location.href = $(this).val();">
             {if $responsiveselectsubnavtext}<option value="">{$responsiveselectsubnavtext}</option>{/if}
             {foreach $selectsubnav n}<option value="{$n.url}"{if $n.pageid==$pageid} selected="selected"{/if}>{$n.label}</option>{if $n.subnav}
                 {foreach $n.subnav s}<option value="{$s.url}" class="subnav"{if $s.pageid==$pageid} selected="selected"{/if}>{$s.label}</option>
