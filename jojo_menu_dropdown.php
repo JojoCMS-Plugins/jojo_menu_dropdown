@@ -23,7 +23,7 @@ class Jojo_Plugin_jojo_menu_dropdown extends Jojo_Plugin
         global $smarty;
 
         /* Find all dropdown menus */
-        $smarty->assign('responsiveselect', (boolean)(Jojo::getOption('tbootstrap_responsive', 'no')=='yes' && Jojo::getOption('responsive_selectmenu', 'no')!='no'));
+        $smarty->assign('responsiveselect', (boolean)(Jojo::getOption('responsive_selectmenu', 'no')!='no'));
         $smarty->assign('responsiveselectsize', Jojo::getOption('responsive_selectmenu', 'no'));
         $smarty->assign('responsiveselecttext', Jojo::getOption('responsive_selectmenu_selecttext', ''));
         $smarty->assign('responsiveselectsubnav', (boolean)(Jojo::getOption('responsive_selectmenu_subnav', 'no')=='yes'));
