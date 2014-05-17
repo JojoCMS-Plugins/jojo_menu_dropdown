@@ -57,10 +57,3 @@
         </select>
         {/if}
     </div>
-    <script type="text/javascript">
-        /*<![CDATA[*/
-        $("document").ready(function() {ldelim}
-            $("#menu").initMenu();
-        {rdelim});
-        /*]]>*/
-    </script>

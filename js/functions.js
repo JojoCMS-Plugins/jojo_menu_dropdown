@@ -1,3 +1,9 @@
+$("document").ready(function() {
+    if ($("#menu .hassubmenu").length>0) {
+        $("#menu").initMenu();
+    }
+});
+
 function MenuController( rootElement ) {
 
 	this.rootElement = rootElement;
