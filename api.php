@@ -18,11 +18,21 @@ Jojo::addFilter('output', 'menu_dropdown', 'jojo_menu_dropdown');
 $_options[] = array(
     'id'          => 'responsive_selectmenu',
     'category'    => 'Navigation',
-    'label'       => 'Responsive Select Menu',
-    'description' => 'Convert menu to a select dropdown at phone or tablet screen sizes',
+    'label'       => 'Responsive Menu Switch',
+    'description' => 'Convert menu to a mobile-frendly version at phone or tablet screen sizes',
     'type'        => 'radio',
     'default'     => 'no',
-    'options'     => 'no,tablet,phone',
+    'options'     => 'no,tablet,phone,all',
+);
+
+$_options[] = array(
+    'id'          => 'responsive_menutype',
+    'category'    => 'Navigation',
+    'label'       => 'Responsive Menu Type',
+    'description' => 'Menu type to use for mobile.',
+    'type'        => 'radio',
+    'default'     => 'select',
+    'options'     => 'select,dropdown,sideslide',
 );
 
 $_options[] = array(

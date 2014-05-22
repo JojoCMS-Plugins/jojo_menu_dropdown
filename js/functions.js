@@ -1,7 +1,19 @@
 $("document").ready(function() {
-    if ($("#menu .hassubmenu").length>0) {
+    if ($("#menu .hassubnav").length>0) {
         $("#menu").initMenu();
     }
+    $('.menu-toggle').click(function (e) {
+        $('#menu-mobile').toggleClass('open');
+        e.preventDefault();
+    });
+    if ($("#menu-mobile .hassubnav").length>0) {
+        $('#menu-mobile .subnavtoggle').click(function(e) {
+            e.preventDefault();
+            $(this).parent().toggleClass('active');
+            $(this).next('ul').toggleClass('active');
+         }); 
+    }
+    
 });
 
 function MenuController( rootElement ) {
