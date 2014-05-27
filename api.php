@@ -22,7 +22,7 @@ $_options[] = array(
     'description' => 'Convert menu to a mobile-frendly version at phone or tablet screen sizes',
     'type'        => 'radio',
     'default'     => 'no',
-    'options'     => 'no,tablet,phone,all',
+    'options'     => 'no,laptop,tablet,phone,all',
 );
 
 $_options[] = array(

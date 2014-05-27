@@ -19,7 +19,7 @@
         </ul>
     {/template}*}
 {if $responsivetype!='select' && $responsiveselect}
-    <a id="page-menu-toggle" class="menu-toggle btn btn-default btn-lg{if $responsiveselectsize=='phone'} visible-xs{elseif $responsiveselectsize=='tablet'} hidden-md{/if}" href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+    <a id="page-menu-toggle" class="menu-toggle btn btn-default btn-lg{if $responsiveselectsize=='phone'} visible-xs{elseif $responsiveselectsize=='tablet'} visible-xs visible-sm{elseif $responsiveselectsize=='laptop'} hidden-lg{/if}" href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
    <div id="menu-mobile" class="{$responsivetype} {if $responsiveselectsize=='phone'}visible-xs{elseif $responsiveselectsize=='tablet'}hidden-md{/if}">
         <ul>
             {foreach $mainnav k n mainnav}<li id="itemNo{$k}" class="{if $.foreach.mainnav.last}last {elseif $.foreach.mainnav.first}first {/if}{if $n.selected}current {/if}{if $n.subnav}hassubnav{/if}" ><a href="{$n.url}" title="{$n.title}"{if $n.pg_followto=='no'} rel="nofollow"{/if}>{$n.label}<span></span></a>{if $n.subnav }<a href="#" class="subnavtoggle"></a>
@@ -44,7 +44,7 @@
 {/if}
 {if $responsiveselectsize!='all'}
     <div id="menu" class="{if $menuvertical} vertical{/if}">
-        <ul{if $responsiveselect} class="hidden-xs {if $responsiveselectsize=='tablet'}hidden-sm{/if}"{/if}>
+        <ul{if $responsiveselect} class="{if $responsiveselectsize=='phone'}hidden-xs {elseif $responsiveselectsize=='tablet'} hidden-xs hidden-sm{elseif $responsiveselectsize=='laptop'} visible-lg{/if}"{/if}>
             {foreach $mainnav k n mainnav}<li id="itemNo{$k}" class="{if $.foreach.mainnav.last}last {elseif $.foreach.mainnav.first}first {/if}{if $n.selected}current {/if}{if $n.subnav}hassubnav{/if}" ><a href="{$n.url}" title="{$n.title}"{if $n.pg_followto=='no'} rel="nofollow"{/if}>{$n.label}<span></span></a>
                 {if $n.subnav }<ul{if $n.selected} class="active"{/if}>
                     {foreach $n.subnav sk s subnav}<li class="{if $s.selected}current {/if}{if $.foreach.subnav.last}last {/if}{if $s.subnav}hassubnav{/if}"><a href="{$s.url}" title="{$s.title}">{$s.label}<span></span></a>{if $s.subnav }
@@ -67,7 +67,7 @@
 {/if}
 {if $responsivetype=='select' && $responsiveselect}
     <div id="selectmenu">
-        <select class="form-control {if $responsiveselectsize=='phone'}visible-xs{elseif $responsiveselectsize=='tablet'}hidden-md{/if}" onchange="window.location.href = $(this).val();">
+        <select class="form-control {if $responsiveselectsize=='phone'}visible-xs{elseif $responsiveselectsize=='tablet'} visible-xs visible-sm{elseif $responsiveselectsize=='laptop'} hidden-lg{/if}" onchange="window.location.href = $(this).val();">
             {if $responsiveselecttext && $pageid==$home}<option value="">{$responsiveselecttext}</option>{/if}
             {foreach $mainnav n}<option value="{$n.url}"{if $n.pageid==$pageid || ($n.selected && $n.subnav)} selected="selected"{/if}>{$n.label}</option>{if !$responsiveselectsubnav && $n.subnav}
                 {foreach $n.subnav s}<option value="{$s.url}" class="subnav"{if $s.pageid==$pageid} selected="selected"{/if}>{$s.label}</option>
@@ -75,7 +75,7 @@
             {elseif $n.subnav}{assign var=$selectsubnav value=$n.subnav}{/if}
             {/foreach}
         </select>
-        {if $responsiveselect && $selectsubnav}<select class="subnav form-control {if $responsiveselectsize=='phone'}visible-xs{elseif $responsiveselectsize=='tablet'}hidden-md{/if}" onchange="window.location.href = $(this).val();">
+        {if $responsiveselect && $selectsubnav}<select class="subnav form-control {if $responsiveselectsize=='phone'}visible-xs{elseif $responsiveselectsize=='tablet'} visible-xs visible-sm{elseif $responsiveselectsize=='laptop'} hidden-lg{/if}" onchange="window.location.href = $(this).val();">
             {if $responsiveselectsubnavtext}<option value="">{$responsiveselectsubnavtext}</option>{/if}
             {foreach $selectsubnav n}<option value="{$n.url}"{if $n.pageid==$pageid} selected="selected"{/if}>{$n.label}</option>{if $n.subnav}
                 {foreach $n.subnav s}<option value="{$s.url}" class="subnav"{if $s.pageid==$pageid} selected="selected"{/if}>{$s.label}</option>
