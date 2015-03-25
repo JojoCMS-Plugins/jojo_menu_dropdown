@@ -13,7 +13,6 @@ $("document").ready(function() {
             $(this).next('ul').toggleClass('active');
          }); 
     }
-    
 });
 
 function MenuController( rootElement ) {
