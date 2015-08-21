@@ -16,6 +16,16 @@
 Jojo::addFilter('output', 'menu_dropdown', 'jojo_menu_dropdown');
 
 $_options[] = array(
+    'id'          => 'responsive_menulayout',
+    'category'    => 'Navigation',
+    'label'       => 'Menu Layout',
+    'description' => 'Non-mobile menu layout is horizontal or vertically stacked',
+    'type'        => 'radio',
+    'default'     => 'horizontal',
+    'options'     => 'horizontal,vertical',
+);
+
+$_options[] = array(
     'id'          => 'responsive_selectmenu',
     'category'    => 'Navigation',
     'label'       => 'Responsive Menu Switch',

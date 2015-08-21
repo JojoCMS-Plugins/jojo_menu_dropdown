@@ -1,26 +1,7 @@
-    {* Recursive template so that the nav is not limited to a hard coded level. Untested will only work with dwoo 1.1.1 and up *}
-    {*{template menu data navLevel=0 navCount=0}
-        <ul>
-        {foreach from=$data item=entry}
-            {$class = ''}
-            {if $navLevel=0}
-                {$class .= 'itemNo'.$navCount}
-            {else if $.foreach.default.last}
-                {$class .= 'last'}
-            {/if}
-            <li{if $entry.selected} id="current"{/if} {if strlen($class) > 0}class="{$class}"{/if} >
-                <a {if $navLevel > 0}class="menu-sub-link" {/if}href="{$entry.url}" title="{$entry.title}"{if $entry.pg_followto=='no'} rel="nofollow"{/if}>{$entry.label}</a>
-            {if $entry.subnav }
-                {menu $entry.subnav $navLevel++}
-            {/if}
-            </li>
-            <!-- {$navCount++} -->
-        {/foreach}
-        </ul>
-    {/template}*}
 {if $responsivetype!='select' && $responsiveselect}
-    <a id="page-menu-toggle" class="menu-toggle btn btn-default btn-lg{if $responsiveselectsize=='phone'} visible-xs{elseif $responsiveselectsize=='tablet'} visible-xs visible-sm{elseif $responsiveselectsize=='laptop'} hidden-lg{/if}" href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
+    <a id="page-menu-toggle" class="menu-toggle btn btn-default{if $responsiveselectsize=='phone'} visible-xs{elseif $responsiveselectsize=='tablet'} visible-xs visible-sm{elseif $responsiveselectsize=='laptop'} hidden-lg{/if}" href="#"><span class="glyphicon glyphicon-align-justify"></span></a>
    <div id="menu-mobile" class="{$responsivetype} {if $responsiveselectsize=='phone'}visible-xs{elseif $responsiveselectsize=='tablet'}hidden-md{/if}">
+        <a class="close menu-toggle btn btn-default">x</a>
         <ul>
             {foreach $mainnav k n mainnav}<li id="itemNo{$k}" class="{if $.foreach.mainnav.last}last {elseif $.foreach.mainnav.first}first {/if}{if $n.selected}current {/if}{if $n.subnav}hassubnav{/if}" ><a href="{$n.url}" title="{$n.title}"{if $n.pg_followto=='no'} rel="nofollow"{/if}>{$n.label}<span></span></a>{if $n.subnav }<a href="#" class="subnavtoggle"></a>
                 <ul{if $n.selected} class="active"{/if}>
@@ -43,7 +24,7 @@
     </div>
 {/if}
 {if $responsiveselectsize!='all'}
-    <div id="menu" class="{if $menuvertical} vertical{/if}">
+    <div id="menu"{if $OPTIONS.responsive_menulayout=='vertical'} class="vertical"{/if}>
         <ul{if $responsiveselect} class="{if $responsiveselectsize=='phone'}hidden-xs {elseif $responsiveselectsize=='tablet'} hidden-xs hidden-sm{elseif $responsiveselectsize=='laptop'} visible-lg{/if}"{/if}>
             {foreach $mainnav k n mainnav}<li id="itemNo{$k}" class="{if $.foreach.mainnav.last}last {elseif $.foreach.mainnav.first}first {/if}{if $n.selected}current {/if}{if $n.subnav}hassubnav{/if}" ><a href="{$n.url}" title="{$n.title}"{if $n.pg_followto=='no'} rel="nofollow"{/if}>{$n.label}<span></span></a>
                 {if $n.subnav }<ul{if $n.selected} class="active"{/if}>
@@ -72,7 +53,7 @@
             {foreach $mainnav n}<option value="{$n.url}"{if $n.pageid==$pageid || ($n.selected && $n.subnav)} selected="selected"{/if}>{$n.label}</option>{if !$responsiveselectsubnav && $n.subnav}
                 {foreach $n.subnav s}<option value="{$s.url}" class="subnav"{if $s.pageid==$pageid} selected="selected"{/if}>{$s.label}</option>
                 {/foreach}
-            {elseif $n.subnav}{assign var=$selectsubnav value=$n.subnav}{/if}
+            {elseif $n.subnav && $n.selected}{$selectsubnav=$n.subnav}{/if}
             {/foreach}
         </select>
         {if $responsiveselect && $selectsubnav}<select class="subnav form-control {if $responsiveselectsize=='phone'}visible-xs{elseif $responsiveselectsize=='tablet'} visible-xs visible-sm{elseif $responsiveselectsize=='laptop'} hidden-lg{/if}" onchange="window.location.href = $(this).val();">
