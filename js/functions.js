@@ -1,5 +1,5 @@
 $("document").ready(function() {
-    if ($("#menu .hassubnav").length>0) {
+    if ($("#menu .hassubnav").length>0 && $("#menu.vertical").length==0) {
         $("#menu").initMenu();
     }
     $('.menu-toggle').click(function (e) {
